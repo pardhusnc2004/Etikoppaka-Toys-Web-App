@@ -1,0 +1,2 @@
+DELETE http://localhost:4000/api/v1/items/67c03e84fe4682912bfd4575
+Content-Type: application/json
