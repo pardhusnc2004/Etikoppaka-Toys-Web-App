@@ -4,6 +4,7 @@ import Navbar from './Components/Navbar/Navbar.jsx'
 import Footer from './Components/Footer/Footer.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage/HomePage'
+import AddItem from './Pages/AddItemPage/AddItem.jsx'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path='/' element={<HomePage />} />
+          <Route path='/add-item' element={<AddItem />} />
         </Routes>
       </Router>
       <Footer />
