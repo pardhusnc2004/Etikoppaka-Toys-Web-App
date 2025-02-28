@@ -5,11 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import PopUp from '../../Components/PopUp/PopUp';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const [items, setItems] = useState(null);
     const [updateInitialized, setUpdateInitialized] = useState(false)
     const [showPopUp, setShowPopUp] = useState(null)
+    const navigate = useNavigate()
     useEffect(() => {
         setUpdateInitialized(false)
         const fetchData = async () => {
@@ -60,13 +62,13 @@ const HomePage = () => {
                                 <td>{item.name}</td>
                                 <td>{item.description}</td>
                                 <td className='flex justify-center items-center'>
-                                    <img src={item.images[0]} width={"100px"} alt={item.name} />
+                                    <img src={item.images? item.images[0]: ""} width={"100px"} alt={item.name} />
                                 </td>
                                 <td>
                                     <input type="checkbox" defaultChecked={item.available} onChange={() => {handleItemAvailability(item)}} />
                                 </td>
                                 <td>
-                                    <FontAwesomeIcon className='px-2' icon={faPencilSquare} />
+                                    <FontAwesomeIcon className='px-2' onClick={() => navigate(`/update-item/${item._id}`)} icon={faPencilSquare} />
                                     <FontAwesomeIcon className='px-2' icon={faTrashCan} onClick={() => setShowPopUp(item._id)} />
                                 </td>
                             </tr>

@@ -5,6 +5,7 @@ import Footer from './Components/Footer/Footer.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage/HomePage'
 import AddItem from './Pages/AddItemPage/AddItem.jsx'
+import UpdateItem from './Pages/UpdateItemPage/UpdateItem.jsx'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/add-item' element={<AddItem />} />
+          <Route path={`/update-item/:_id`} element={<UpdateItem />} />
         </Routes>
       </Router>
       <Footer />
