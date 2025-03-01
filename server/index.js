@@ -15,7 +15,7 @@ const CONNECTION_STRING_URI = process.env.CONNECTION_STRING_URI;
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors({
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
