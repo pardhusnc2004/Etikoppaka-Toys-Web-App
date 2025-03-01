@@ -6,6 +6,9 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 
 export const Authenticate = async (req, res, next) => {
     try {
+        console.log("Cookies received:", req.cookies); // extra
+        console.log("JWT_SECRET_KEY:", JWT_SECRET_KEY ? "Loaded" : "NOT LOADED"); // extra
+
         const token = req.cookies["jwt_secret"];
         if(!token) {
             return res.status(403).json({ message: "Forbidden request... Login again..." })
@@ -14,6 +17,7 @@ export const Authenticate = async (req, res, next) => {
         req.admin = payload
         next();
     } catch (error) {
+        console.error("JWT Verification Error:", error.message);
         return res.status(500).json({ message: "Internal server error..." })
     }
 }
