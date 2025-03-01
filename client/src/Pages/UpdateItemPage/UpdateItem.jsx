@@ -62,7 +62,7 @@ const UpdateItem = () => {
             fileData.append("file", file)
             fileData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET)
             fileData.append("cloud_name", import.meta.env.VITE_CLOUDINARY_CLOUD_NAME)
-            const response = await axios.post(import.meta.env.VITE_CLOUDINARY_UPLOAD_URL, fileData)
+            const response = await axios.post(import.meta.env.VITE_CLOUDINARY_UPLOAD_URL, fileData, { withCredentials: false, headers: { "Content-Type": "multipart/form-data" } })
             const responseData = await response.data;
             return responseData.url
         } catch (error) {
