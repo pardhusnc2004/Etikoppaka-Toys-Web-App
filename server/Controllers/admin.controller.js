@@ -18,13 +18,14 @@ export const Login = async (req, res) => {
 
         res.cookie("jwt_secret", token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: "Lax",
             maxAge: 24 * 60 * 60 * 1000,
         });
 
         return res.status(200).json({ message: "Login successful..." })
     } catch (error) {
+        console.log("ERROR OCCURED!!!",error.message)
         return res.status(500).json({ message: error.message });
     }
 }
