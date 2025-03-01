@@ -13,8 +13,8 @@ export const GenerateToken = async (payload, res) => {
             sameSite: "Lax",
             maxAge: 24 * 60 * 60 * 1000,
         });
-
+        return;
     } catch (error) {
-        res.status(500).json({ message: "Token generation failed", error: error.message });
+        return res.status(500).json({ message: "Token generation failed", error: error.message });
     }
 };
