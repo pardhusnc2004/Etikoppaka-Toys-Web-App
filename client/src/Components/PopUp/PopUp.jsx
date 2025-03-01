@@ -9,7 +9,6 @@ const PopUp = ({ message, _id, setShowPopUp }) => {
             const response = await axios.delete(`http://localhost:4000/api/v1/items/${_id}`)
             toast.success(response.data.message)
             setShowPopUp(null)
-            window.location.reload();
         } catch (error) {
             toast.error(error.message)
         }
