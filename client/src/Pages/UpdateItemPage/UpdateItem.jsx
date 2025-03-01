@@ -26,7 +26,7 @@ const UpdateItem = () => {
             } catch (error) {
                 toast.error(error.message)
                 toast.error("Invalid update request")
-                console.log("Invalid item")
+                navigate("/")
             }            
         }
         fetchItem();
