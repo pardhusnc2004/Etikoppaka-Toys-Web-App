@@ -6,12 +6,15 @@ import { faPencilSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import PopUp from '../../Components/PopUp/PopUp';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Contexts/AuthContext';
 
 const HomePage = () => {
+    const { isAdmin } = useAuth()
     const [items, setItems] = useState(null);
     const [updateInitialized, setUpdateInitialized] = useState(false)
     const [showPopUp, setShowPopUp] = useState(null)
     const navigate = useNavigate()
+    
     useEffect(() => {
         setUpdateInitialized(false)
         const fetchData = async () => {
@@ -24,6 +27,7 @@ const HomePage = () => {
         }
         fetchData();
     }, [updateInitialized])
+
     const handleItemAvailability = (item) => {
         const updateItemAvailability = async () => {
             try {
@@ -52,7 +56,7 @@ const HomePage = () => {
                             <th>Item Description</th>
                             <th>Item Images</th>
                             <th>Item Availability</th>
-                            <th>Actions</th>
+                            {isAdmin? <th>Actions</th>: null}
                         </tr>
                     </thead>
                     <tbody>
@@ -65,12 +69,13 @@ const HomePage = () => {
                                     <img src={item.images? item.images[0]: ""} width={"100px"} alt={item.name} />
                                 </td>
                                 <td>
-                                    <input type="checkbox" defaultChecked={item.available} onChange={() => {handleItemAvailability(item)}} />
+                                    {isAdmin? <input type="checkbox" defaultChecked={item.available} onChange={() => {handleItemAvailability(item)}} />:
+                                    item.available? "Yes":"No"}
                                 </td>
-                                <td>
+                                {isAdmin? <td>
                                     <FontAwesomeIcon className='px-2' onClick={() => navigate(`/update-item/${item._id}`)} icon={faPencilSquare} />
                                     <FontAwesomeIcon className='px-2' icon={faTrashCan} onClick={() => setShowPopUp(item._id)} />
-                                </td>
+                                </td>: null}
                             </tr>
                         ))}
                     </tbody>
