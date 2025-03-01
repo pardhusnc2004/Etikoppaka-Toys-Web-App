@@ -5,6 +5,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
+const VITE_MY_SERVER_URL = import.meta.env.VITE_MY_SERVER_URL
+
 const AddItem = () => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -60,7 +62,7 @@ const AddItem = () => {
     const handleAddItemToDB = async() => {
         if(name == "" && description == "") return
         try {
-            const response = await axios.post('https://etikoppaka-toys-web-app.onrender.com/api/v1/items', {
+            const response = await axios.post(`${VITE_MY_SERVER_URL}/api/v1/items`, {
                 name: name,
                 description: description,
                 images: images

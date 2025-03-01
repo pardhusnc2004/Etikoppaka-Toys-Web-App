@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 
+const VITE_MY_SERVER_URL = import.meta.env.VITE_MY_SERVER_URL
+
 const ItemDetailsCard = () => {
     const { _id } = useParams()
     const [item, setItem] = useState(null)
@@ -12,7 +14,7 @@ const ItemDetailsCard = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`https://etikoppaka-toys-web-app.onrender.com/api/v1/items/${_id}`)
+                const response = await axios.get(`${VITE_MY_SERVER_URL}/api/v1/items/${_id}`)
                 setItem(response.data.Item)
                 toast.success(response.data.message)
             } catch (error) {

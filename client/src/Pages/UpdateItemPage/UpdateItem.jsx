@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
+const VITE_MY_SERVER_URL = import.meta.env.VITE_MY_SERVER_URL
+
 const UpdateItem = () => {
     const { _id } = useParams()
     const [item, setItem] = useState(null)
@@ -19,7 +21,7 @@ const UpdateItem = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`https://etikoppaka-toys-web-app.onrender.com/api/v1/items/${_id}`)
+                const response = await axios.get(`${VITE_MY_SERVER_URL}/api/v1/items/${_id}`)
                 toast.success(response.data.message)
                 setItem(response.data.Item)
                 setFiles(response.data.Item.images)
@@ -44,7 +46,7 @@ const UpdateItem = () => {
 
     const handleUpdateItemToDB = async() => {
         try {
-            const response = await axios.put(`https://etikoppaka-toys-web-app.onrender.com/api/v1/items/${item._id}`, {
+            const response = await axios.put(`${VITE_MY_SERVER_URL}/api/v1/items/${item._id}`, {
                 name: name,
                 description: description,
                 images: finalFiles

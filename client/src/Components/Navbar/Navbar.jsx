@@ -5,6 +5,8 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useSearch } from '../../Contexts/SearchContext'
 
+const VITE_MY_SERVER_URL = import.meta.env.VITE_MY_SERVER_URL
+
 const Navbar = () => {
     const { isAdmin, setIsAdmin } = useAuth()
     const { searchQuery, setSearchQuery } = useSearch()
@@ -20,7 +22,7 @@ const Navbar = () => {
     const handleLogin = async () => {
         if(isAdmin) {
             try {
-                const response = await axios.post('https://etikoppaka-toys-web-app.onrender.com/api/v1/auth/logout', {}, { withCredentials: true })
+                const response = await axios.post(`${VITE_MY_SERVER_URL}/api/v1/auth/logout`, {}, { withCredentials: true })
                 toast.success(response.data.message)
             } catch (error) {
                 toast.error(error.message)

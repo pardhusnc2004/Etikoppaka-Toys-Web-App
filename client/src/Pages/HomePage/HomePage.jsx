@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Contexts/AuthContext';
 import { useSearch } from '../../Contexts/SearchContext'
 
+const VITE_MY_SERVER_URL = import.meta.env.VITE_MY_SERVER_URL
+
 const HomePage = () => {
     const { isAdmin } = useAuth()
     const [items, setItems] = useState(null);
@@ -38,7 +40,7 @@ const HomePage = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://etikoppaka-toys-web-app.onrender.com/api/v1/items')
+            const response = await axios.get(`${VITE_MY_SERVER_URL}/api/v1/items`)
             setItems(response.data.Items)
         } catch (error) {
             console.log(error.message)
@@ -60,7 +62,7 @@ const HomePage = () => {
     const handleItemAvailability = (item) => {
         const updateItemAvailability = async () => {
             try {
-                const response = await axios.put(`https://etikoppaka-toys-web-app.onrender.com/api/v1/items/${item._id}`, {
+                const response = await axios.put(`${VITE_MY_SERVER_URL}/api/v1/items/${item._id}`, {
                     name: item.name,
                     description: item.description,
                     images: item.images,

@@ -8,6 +8,7 @@ import { useAuth } from '../../Contexts/AuthContext.jsx'
 import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
+const VITE_MY_SERVER_URL = import.meta.env.VITE_MY_SERVER_URL
 
 const AdminLogin = () => {
     const { isAdmin, setIsAdmin } = useAuth()
@@ -22,7 +23,7 @@ const AdminLogin = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('https://etikoppaka-toys-web-app.onrender.com/api/v1/auth/login', {
+            const response = await axios.post(`${VITE_MY_SERVER_URL}/api/v1/auth/login`, {
                 username: username,
                 password: password
             }, { withCredentials: true })
