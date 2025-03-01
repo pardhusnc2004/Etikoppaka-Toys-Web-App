@@ -7,7 +7,8 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 export const Authenticate = async (req, res, next) => {
     try {
         console.log("Cookies received:", req.cookies); // extra
-        console.log("JWT_SECRET_KEY:", JWT_SECRET_KEY ? "Loaded" : "NOT LOADED"); // extra
+        console.log("Headers:", req.headers); // extra
+        console.log("Cookies:", req.cookies); // extra
 
         const token = req.cookies["jwt_secret"];
         if(!token) {
