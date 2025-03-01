@@ -18,6 +18,14 @@ const HomePage = () => {
     const [fetchAgain, setFetchAgain] = useState(false)
     const [areSorted, setAreSorted] = useState(false)
     const { searchQuery } = useSearch()
+    const [viewItemCard, setViewItemCard] = useState(null)
+
+    useEffect(() => {
+        if(viewItemCard) {
+            navigate(`/item-details-card/${viewItemCard}`)
+            setViewItemCard(null)
+        }
+    }, [viewItemCard])
 
     useEffect(() => {
         if(searchQuery == "") {
@@ -106,10 +114,10 @@ const HomePage = () => {
                     {items?.length > 0 ? (
                         items.map((item, index) => (
                         <tr key={index} className="border-b border-gray-700 hover:bg-gray-700">
-                            <td className="p-3 border border-gray-700">{index + 1}</td>
-                            <td className="p-3 border border-gray-700">{item.name}</td>
-                            <td className="p-3 border border-gray-700 truncate max-w-xs">{item.description}</td>
-                            <td className="p-3 border border-gray-700 flex justify-center items-center">
+                            <td onClick={() => setViewItemCard(item._id)} className="p-3 border border-gray-700">{index + 1}</td>
+                            <td onClick={() => setViewItemCard(item._id)} className="p-3 border border-gray-700">{item.name}</td>
+                            <td onClick={() => setViewItemCard(item._id)} className="p-3 border border-gray-700 truncate max-w-xs">{item.description}</td>
+                            <td onClick={() => setViewItemCard(item._id)} className="p-3 border border-gray-700 flex justify-center items-center">
                             <img
                                 src={item.images ? item.images[0] : ""}
                                 width="80px"

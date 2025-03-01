@@ -1,3 +1,4 @@
+import { image } from '@cloudinary/url-gen/qualifiers/source'
 import { faBox, faFileAlt, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
@@ -57,6 +58,7 @@ const AddItem = () => {
     }
 
     const handleAddItemToDB = async() => {
+        if(name == "" && description == "") return
         try {
             const response = await axios.post('http://localhost:4000/api/v1/items', {
                 name: name,

@@ -9,6 +9,7 @@ import UpdateItem from './Pages/UpdateItemPage/UpdateItem.jsx'
 import AdminLogin from './Pages/AdminLoginPage/AdminLogin.jsx'
 import { useAuth } from './Contexts/AuthContext.jsx'
 import YouAreNotAdmin from './Pages/YouAreNotAdminPage/YouAreNotAdmin.jsx'
+import ItemDetailsCard from './Pages/ItemDetailsCardPage/ItemDetailsCard.jsx'
 
 const App = () => {
   const { isAdmin } = useAuth()
@@ -23,6 +24,7 @@ const App = () => {
             <Route path='/add-item' element={(isAdmin)? <AddItem />: <YouAreNotAdmin />} />
             <Route path={`/update-item/:_id`} element={(isAdmin)?<UpdateItem />: <YouAreNotAdmin />} />
             <Route path='/auth/login' element={<AdminLogin />} />
+            <Route path='/item-details-card/:_id' element={<ItemDetailsCard />} />
           </Routes>
       </div>
       <Footer />
