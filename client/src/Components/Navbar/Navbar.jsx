@@ -17,10 +17,6 @@ const Navbar = () => {
         }
     }, [tryingToLogin])
 
-    const handleAddItem = () => {
-        navigate("/add-item")
-    }
-
     const handleLogin = async () => {
         if(isAdmin) {
             try {
@@ -38,15 +34,14 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div className="flex-1">
-                <a className="text-xl">Lacquer Toys</a>
-            </div>
-            <div style={{paddingRight:"13px"}} className="absolute left-1/2 transform -translate-x-1/2">
-                <btn onClick={handleAddItem} className="btn bg-green-800 text-slate-300 cursor-pointer">Add Item</btn>
+                <a className="text-2xl font-bold tracking-wide text-slate-300 transition-colors duration-300">
+                    Lacquer Toys
+                </a>
             </div>
             <div className="flex gap-2">
                 <input onChange={(e) => setSearchQuery(e.target.value)} type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
                 <div className="navbar-end">
-                    <button className="btn bg-blue-800" onClick={handleLogin}>{isAdmin? "Logout": "Admin?"}</button>
+                    <button className="btn bg-blue-800 hover:bg-blue-700" onClick={handleLogin}>{isAdmin? "Logout": "Admin?"}</button>
                 </div>
             </div>
         </div>

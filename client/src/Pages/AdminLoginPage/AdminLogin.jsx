@@ -66,7 +66,7 @@ const AdminLogin = () => {
                 />
             </label>
 
-            <button className="btn bg-blue-600" onClick={handleLogin}>
+            <button className="btn bg-blue-800 hover:bg-blue-700" onClick={handleLogin}>
                 Login
             </button>
         </div>

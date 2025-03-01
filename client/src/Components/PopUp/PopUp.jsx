@@ -15,8 +15,8 @@ const PopUp = ({ message, _id, setShowPopUp }) => {
     }
 
     return (
-        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50'>
-            <div className='container size-18 bg-white flex p-6 gap-5 flex-col'>
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50'>
+            <div className='container size-18 bg-slate flex p-6 gap-5 flex-col'>
                 <div>
                     {message}
                 </div>

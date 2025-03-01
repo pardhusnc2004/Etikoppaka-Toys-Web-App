@@ -79,44 +79,89 @@ const HomePage = () => {
         }
     }
 
+    const handleAddItem = () => {
+        navigate("/add-item")
+    }
+
     return (
         <div className='text-center'>
-            <div className='flex flex-row gap-2'>
-                <table className='text-center min-w-full text-slate-200'>
-                    <thead>
-                        <tr>
-                            <th>S. NO</th>
-                            <th>Item Name</th>
-                            <th>Item Description</th>
-                            <th>Item Images</th>
-                            <th className='cursor-pointer' onClick={handleItemsSort}>Item Availability</th>
-                            {isAdmin? <th>Actions</th>: null}
-                        </tr>
+            <div className="w-full overflow-x-auto">
+                <table className="w-full border border-gray-700 rounded-lg text-center text-slate-200">
+                    <thead className="bg-gray-800 text-white">
+                    <tr>
+                        <th className="p-3 border border-gray-700 whitespace-nowrap">S. NO</th>
+                        <th className="p-3 border border-gray-700 whitespace-nowrap">Item Name</th>
+                        <th className="p-3 border border-gray-700 whitespace-nowrap">Item Description</th>
+                        <th className="p-3 border border-gray-700 whitespace-nowrap">Item Images</th>
+                        <th
+                        className="p-3 border border-gray-700 cursor-pointer whitespace-nowrap"
+                        onClick={handleItemsSort}
+                        >
+                        Item Availability
+                        </th>
+                        {isAdmin && <th className="p-3 border border-gray-700 whitespace-nowrap">Actions</th>}
+                    </tr>
                     </thead>
                     <tbody>
-                        {items?.length && items.map((item, index) => (
-                            <tr key={index}>
-                                <td>{index+1}</td>
-                                <td>{item.name}</td>
-                                <td>{item.description}</td>
-                                <td className='flex justify-center items-center'>
-                                    <img src={item.images? item.images[0]: ""} width={"100px"} alt={item.name} />
+                    {items?.length > 0 ? (
+                        items.map((item, index) => (
+                        <tr key={index} className="border-b border-gray-700 hover:bg-gray-700">
+                            <td className="p-3 border border-gray-700">{index + 1}</td>
+                            <td className="p-3 border border-gray-700">{item.name}</td>
+                            <td className="p-3 border border-gray-700 truncate max-w-xs">{item.description}</td>
+                            <td className="p-3 border border-gray-700 flex justify-center items-center">
+                            <img
+                                src={item.images ? item.images[0] : ""}
+                                width="80px"
+                                className="rounded-md shadow"
+                                alt={item.name}
+                            />
+                            </td>
+                            <td className="p-3 border border-gray-700">
+                            {isAdmin ? (
+                                <input
+                                type="checkbox"
+                                checked={item.available}
+                                onChange={() => handleItemAvailability(item)}
+                                />
+                            ) : (
+                                item.available ? "Yes" : "No"
+                            )}
+                            </td>
+                            {isAdmin && (
+                                <td className="p-3 border border-gray-700 text-center">
+                                    <button
+                                        className="px-3 py-1 bg-blue-800 text-white rounded-md hover:bg-blue-600 transition"
+                                        onClick={() => navigate(`/update-item/${item._id}`)}
+                                    >
+                                    <   FontAwesomeIcon icon={faPencilSquare} />
+                                    </button>
+                                    <button
+                                        className="ml-3 px-3 py-1 bg-red-800 text-white rounded-md hover:bg-red-600 transition"
+                                        onClick={() => setShowPopUp(item._id)}
+                                    >
+                                    <   FontAwesomeIcon icon={faTrashCan} />
+                                    </button>
                                 </td>
-                                <td>
-                                    {isAdmin? <input type="checkbox" checked={item.available} onChange={() => {handleItemAvailability(item)}} />:
-                                    item.available? "Yes":"No"}
-                                </td>
-                                {isAdmin? <td>
-                                    <FontAwesomeIcon className='px-2' onClick={() => navigate(`/update-item/${item._id}`)} icon={faPencilSquare} />
-                                    <FontAwesomeIcon className='px-2' icon={faTrashCan} onClick={() => setShowPopUp(item._id)} />
-                                </td>: null}
-                            </tr>
-                        ))}
+                            )}
+                        </tr>
+                        ))
+                    ) : (
+                        <tr>
+                        <td colSpan={isAdmin ? 6 : 5} className="p-4 text-gray-400">
+                            No items found
+                        </td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </div>
-            <div>
+
+            <div className='flex gap-3 justify-center py-3'>
                 <button className='btn' onClick={() => setFetchAgain(true)}>fetchAgain</button>
+                {isAdmin? <div>
+                    <button onClick={handleAddItem} className="btn bg-green-800 hover:bg-green-700">Add Item</button>
+                </div>: null}
             </div>
             {showPopUp !== null && (
                 <PopUp message="Are you sure you want to delete this item?" _id={showPopUp} setShowPopUp={setShowPopUp} />

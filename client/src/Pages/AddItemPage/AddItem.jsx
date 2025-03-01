@@ -1,3 +1,5 @@
+import { faBox, faFileAlt, faTimes, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -12,7 +14,7 @@ const AddItem = () => {
     const handleFileUpload = (e) => {
         const uploadedFiles = e.target.files;
         let newFiles = []
-        console.log(uploadedFiles)
+        // console.log(uploadedFiles)
         for(let i=0; i<uploadedFiles.length; i++) {
             newFiles.push(uploadedFiles[i])
         }
@@ -47,9 +49,7 @@ const AddItem = () => {
     }
     
     useEffect(() => {
-        if(images.length != 0) {
-            handleAddItemToDB()
-        }
+       handleAddItemToDB()
     }, [images])
 
     const handleAddItem = async () => {
@@ -71,29 +71,62 @@ const AddItem = () => {
     }
 
     return (
-        <div className='py-3 flex flex-col gap-3 rounded-md'>
+        <div className="flex flex-col space-y-4 p-4 max-w-sm mx-auto text-slate-400">
+            <label className="relative flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500">
+                <FontAwesomeIcon style={{ paddingLeft: "19px" }} icon={faBox} />
+                <input 
+                    type="text" 
+                    value={name} 
+                    onChange={(e) => setName(e.target.value)} 
+                    placeholder="Name of the item" 
+                    className="w-full pl-10 pr-3 py-2 focus:outline-none bg-transparent" 
+                />
+            </label>
+
+            <label className="relative flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500">
+                <FontAwesomeIcon style={{ paddingLeft: "19px" }} icon={faFileAlt} />
+                <input 
+                    type="text" 
+                    value={description} 
+                    onChange={(e) => setDescription(e.target.value)} 
+                    placeholder="Description of the item" 
+                    className="w-full pl-10 pr-3 py-2 focus:outline-none bg-transparent" 
+                />
+            </label>
+
+            <label className="relative flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500">
+                <FontAwesomeIcon style={{ paddingLeft: "19px" }} icon={faUpload} />
+                <input 
+                    type="file" 
+                    multiple 
+                    onChange={handleFileUpload} 
+                    className="w-full pl-10 pr-3 py-2 focus:outline-none bg-transparent" 
+                />
+            </label>
+
             <div>
-                <div><input type="text" placeholder='Name of the item: ' onChange={(e) => setName(e.target.value)} /></div>
-                <div><input type="text" placeholder='Description of the item: ' onChange={(e) => setDescription(e.target.value)} /></div>
-                <div><input type="file" multiple onChange={(e) => handleFileUpload(e)} /></div>
-            </div>
-            <div className=''>
-                {files && files.map((file, index) => (
-                    <div key={index}>
+                {files.length > 0 && files.map((file, index) => (
+                    <div key={index} className="flex justify-between items-center p-2 border-b border-gray-300">
                         <span>{file.name}</span>
-                        <span>{file.type}</span>
-                        <span><button className='btn bg-red-800' onClick={() => {
-                            let tmpFiles = files.filter(val => val != file)
-                            setFiles(tmpFiles)
-                        }}>X</button></span>
+                        <span>
+                            <button 
+                                className="text-red-800" 
+                                onClick={() => setFiles(files.filter((_, i) => i !== index))}
+                            >
+                                <FontAwesomeIcon icon={faTimes} />
+                            </button>
+                        </span>
                     </div>
                 ))}
             </div>
-            <div className='py-3'>
-                <button className='btn bg-green-700' disabled={isUploading || files.length === 0} onClick={handleAddItem}>
-                    {isUploading? "Uploading....":"Add Item"}
-                </button>
-            </div>
+
+            <button 
+                className="btn bg-green-700 text-white py-2 rounded-lg" 
+                disabled={isUploading} 
+                onClick={handleAddItem}
+            >
+                {isUploading ? "Uploading..." : "Add Item"}
+            </button>
         </div>
     )
 }
