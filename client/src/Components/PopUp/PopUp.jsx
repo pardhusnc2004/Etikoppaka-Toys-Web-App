@@ -6,7 +6,7 @@ const PopUp = ({ message, _id, setShowPopUp }) => {
 
     const handleDelete = async () => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/v1/items/${_id}`)
+            const response = await axios.delete(`https://etikoppaka-toys-web-app.onrender.com/api/v1/items/${_id}`)
             toast.success(response.data.message)
             setShowPopUp(null)
         } catch (error) {

@@ -20,7 +20,7 @@ const Navbar = () => {
     const handleLogin = async () => {
         if(isAdmin) {
             try {
-                const response = await axios.post('http://localhost:4000/api/v1/auth/logout')
+                const response = await axios.post('https://etikoppaka-toys-web-app.onrender.com/api/v1/auth/logout', {}, { withCredentials: true })
                 toast.success(response.data.message)
             } catch (error) {
                 toast.error(error.message)

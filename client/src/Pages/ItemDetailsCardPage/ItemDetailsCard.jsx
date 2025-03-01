@@ -12,7 +12,7 @@ const ItemDetailsCard = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/v1/items/${_id}`)
+                const response = await axios.get(`https://etikoppaka-toys-web-app.onrender.com/api/v1/items/${_id}`)
                 setItem(response.data.Item)
                 toast.success(response.data.message)
             } catch (error) {

@@ -22,10 +22,11 @@ const AdminLogin = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:4000/api/v1/auth/login', {
+            const response = await axios.post('https://etikoppaka-toys-web-app.onrender.com/api/v1/auth/login', {
                 username: username,
                 password: password
             }, { withCredentials: true })
+            console.log(response.data)
             if(response.status == 200) {
                 setIsAdmin(true)
                 toast.success(response.data.message)

@@ -60,7 +60,7 @@ const AddItem = () => {
     const handleAddItemToDB = async() => {
         if(name == "" && description == "") return
         try {
-            const response = await axios.post('http://localhost:4000/api/v1/items', {
+            const response = await axios.post('https://etikoppaka-toys-web-app.onrender.com/api/v1/items', {
                 name: name,
                 description: description,
                 images: images
