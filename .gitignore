@@ -31,3 +31,6 @@
 **/*.njsproj
 **/*.sln
 **/*.sw?
+
+# Ignore the Requests folder in the server directory
+/server/Requests
