@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage/HomePage'
 import AddItem from './Pages/AddItemPage/AddItem.jsx'
 import UpdateItem from './Pages/UpdateItemPage/UpdateItem.jsx'
+import AdminLogin from './Pages/AdminLoginPage/AdminLogin.jsx'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/add-item' element={<AddItem />} />
           <Route path={`/update-item/:_id`} element={<UpdateItem />} />
+          <Route path='/auth/login' element={<AdminLogin />} />
         </Routes>
       </Router>
       <Footer />
