@@ -14,7 +14,14 @@ export const Login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials..." })
         }
         const payload = { username: userNameExists.username, id: userNameExists._id };
-        await GenerateToken(payload, res);
+        const token = await GenerateToken(payload, res);
+
+        res.cookie("jwt_secret", token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "Lax",
+            maxAge: 24 * 60 * 60 * 1000,
+        });
 
         return res.status(200).json({ message: "Login successful..." })
     } catch (error) {

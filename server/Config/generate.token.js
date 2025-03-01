@@ -7,14 +7,8 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 export const GenerateToken = async (payload, res) => {
     try {
         const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "1d" });
-        res.cookie("jwt_secret", token, {
-            httpOnly: true,
-            secure: false,
-            sameSite: "Lax",
-            maxAge: 24 * 60 * 60 * 1000,
-        });
-        return;
+        return token;
     } catch (error) {
-        return res.status(500).json({ message: "Token generation failed", error: error.message });
+        throw new Error(error.message);
     }
 };
