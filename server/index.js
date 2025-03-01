@@ -15,7 +15,7 @@ const CONNECTION_STRING_URI = process.env.CONNECTION_STRING_URI;
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors({
-    origin: ["https://etikoppaka-toys-web-app-ui.onrender.com/", "https://etikoppaka-toys-web-app.onrender.com"], 
+    origin: ["https://etikoppaka-toys-web-app-ui.onrender.com", "https://etikoppaka-toys-web-app.onrender.com"], 
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
